@@ -49,7 +49,7 @@ export default class AllAllUserList extends React.Component{
         dataIndex: 'position',
         key: 'position',
     }, {
-        title: 'Action',
+        title: '操作',
         key: 'action',
         render: (text, record) => {
 
@@ -111,7 +111,7 @@ export default class AllAllUserList extends React.Component{
         this.context.router.history.push('/admin/user/audit/'+userId); // 带参数跳转路由
     }
     onSearch=(val)=>{
-        Api.getInfoFormName(val).then(res=>{
+        Api.getInfoFormName({name:val}).then(res=>{
             if(res.status===0){
                 this.setState({
                     disabled:false,
@@ -135,7 +135,7 @@ export default class AllAllUserList extends React.Component{
         return (
             <div className='all-user-list'>
                 <div style={{marginBottom:'10px'}}>
-                    <Button className="getAllUsers" type='primary' disabled={false} onClick={this.getAllUsers}>查看全部用户</Button>
+                    <Button className="getAllUsers" type='primary' disabled={disabled} onClick={this.getAllUsers}>查看全部用户</Button>
                     <InputSearch
                         placeholder="请输入姓名或公司名称搜索"
                         style={{ width: 200 }}

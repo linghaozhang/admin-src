@@ -80,7 +80,7 @@ export default class UserShenFenRenZheng extends React.Component{
         dataIndex: 'position',
         key: 'position',
     }, {
-        title: 'Action',
+        title: '操作',
         key: 'action',
         render: (text, record) => {
 
