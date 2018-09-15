@@ -61,9 +61,8 @@ export default class UserAudit extends React.Component{
         },()=>{
             // 获取数据
             Api.getUser(this.state.userId).then((data)=>{
-
-                console.log(999,data);
                 let d = data.data; //主要数据
+                console.log('data',d)
                 this.setState({
                     type:d.type.toString(),
                     name:d.name,
@@ -87,7 +86,6 @@ export default class UserAudit extends React.Component{
                     dockingType: d.dockingType.toString(),
                     beDockingType: d.beDockingType.toString(),
                 });
-                console.log(787878787878,d.beDockingType);
 
             })
 
@@ -115,15 +113,12 @@ export default class UserAudit extends React.Component{
 
     //用户类型改变
     yonghuleixingChange(e){
-        console.log(1112233333,e);
         this.setState({type:e.target.value}, function () {
-            console.log(998877,this.state.userId,this.state.type);
             Api.updateUser({
                 id:this.state.userId,
                 type:this.state.type,
                 basicOK:0,
             }).then((data)=>{
-                console.log(77777,data);
                 if (data.status == 0){
                     messageSuccess('用户类型已成功修改并重置');
                 }else{
@@ -138,13 +133,12 @@ export default class UserAudit extends React.Component{
     }
 
     confirm(){
-
         if (this.state.payOk != 1){
             messageWarning('成为会员后才能够进行提现');
             return false;
         }
 
-        if (this.state.identityCardReview != 1) {
+        if (this.state.identityCardReview != 2) {
             messageWarning('通过身份认证后才能够进行提现');
             return false;
         }
@@ -167,7 +161,6 @@ export default class UserAudit extends React.Component{
                         location.reload();
                     },2000);
                 }
-                console.log(data);
             })
 
         }
@@ -192,7 +185,6 @@ export default class UserAudit extends React.Component{
 
                 /*判断是审核还是修改权限 如果是修改则无需发送短信给用户*/
                 if (this.state.review == 1) {
-                    console.log('无需发送短信');
                     return false;
                 }
 
@@ -212,11 +204,6 @@ export default class UserAudit extends React.Component{
                 // yzm = calcMD5(yzmStr); // 随机验证码
 
                 var jsonData = '{"password":"YLHdmFoX7C","num":"'+this.state.phone+'","templateNum":"3"}';
-
-                console.log(123,Authorization);
-                console.log(456,sig);
-                console.log(789,jsonData);
-
                 $.ajax({
                     headers:{
                         "Accept":'application/json',
@@ -228,7 +215,6 @@ export default class UserAudit extends React.Component{
                     dataType:'json',
                     data: jsonData,
                     success:function(data){
-                        console.log(data);
                     }
                 })
 
@@ -237,7 +223,6 @@ export default class UserAudit extends React.Component{
             }else{
                 messageError(data.msg);
             }
-            console.log(123,data);
         })
     }
 
@@ -253,7 +238,6 @@ export default class UserAudit extends React.Component{
             }else{
                 messageError(data.msg);
             }
-            console.log(123,data);
         })
     }
 
@@ -263,13 +247,13 @@ export default class UserAudit extends React.Component{
         let type = this.state.type == 1 ? '资金方' : '资产方';
 
         // 所在地区
-        let regionStr = '';
-        if (this.state.region != ""){
-            let region =  eval(this.state.region);
-            let regionArr = region.map((item,index)=>{
-                regionStr += ' '+item;
-            });
-        }
+        // let regionStr = '';
+        // if (this.state.region != ""){
+        //     let region =  eval(this.state.region);
+        //     let regionArr = region.map((item,index)=>{
+        //         regionStr += ' '+item;
+        //     });
+        // }
 
         // 机构类别
         // Api.getConfigById(this.state.orgType).then((data)=>{
@@ -278,7 +262,6 @@ export default class UserAudit extends React.Component{
         //
         //  邀请列表
         let list = this.state.yqList.map((item,index)=>{
-            console.log(11112222,item);
             return (
                 <p key={index} style={{marginBottom:'6px'}}>
                     被邀请人：{item.userInfo.name} &nbsp;&nbsp;&nbsp;&nbsp; 被邀请人ID：{item.userId} &nbsp;&nbsp;&nbsp;&nbsp;被邀请人是否已付费成为会员：{item.userInfo.payOk == 0 ? '未付费' : '已付费'}&nbsp;&nbsp;&nbsp;&nbsp;邀请好友时间：{item.userInfo.landingTime||''}
@@ -300,7 +283,6 @@ export default class UserAudit extends React.Component{
         let identityCardArr = eval(this.state.identityCard);
         let identityCardArrOne = '';
         let identityCardArrTwo = '';
-        console.log(112233,identityCardArr);
         if (this.state.identityCardReview == 2){
             identityCardArrOne = GLOBAL_IMG_URL + identityCardArr[0];
             identityCardArrTwo = GLOBAL_IMG_URL + identityCardArr[1];
@@ -314,7 +296,7 @@ export default class UserAudit extends React.Component{
                     <span>用户类型：{type}</span>
                     <span>手机号码：{this.state.phone}</span>
                     <span>姓名：{this.state.name}</span>
-                    <span>地区：{regionStr}</span>
+                    <span>地区：{this.state.region}</span>
                     {/*<span>出生年月：{this.state.birthday}</span>*/}
                 </p>
                 <p className="row">
