@@ -11,11 +11,10 @@ export default class User extends React.Component{
     callback(key) {
         console.log(key);
     }
-
     render(){
         return (
             <div className='user'>
-                <Tabs defaultActiveKey="1" onChange={this.callback.bind(this)}>
+                <Tabs defaultActiveKey="2" onChange={this.callback.bind(this)}>
                     <TabPane tab="未审核用户" key="1">
                         <ShenheUserList/>
                     </TabPane>

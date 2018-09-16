@@ -35504,9 +35504,8 @@ var UserAudit = function (_React$Component) {
             }, function () {
                 // 获取数据
                 _tourongApi2.default.getUser(_this2.state.userId).then(function (data) {
-
-                    console.log(999, data);
                     var d = data.data; //主要数据
+                    console.log('data', d);
                     _this2.setState({
                         type: d.type.toString(),
                         name: d.name,
@@ -35530,7 +35529,6 @@ var UserAudit = function (_React$Component) {
                         dockingType: d.dockingType.toString(),
                         beDockingType: d.beDockingType.toString()
                     });
-                    console.log(787878787878, d.beDockingType);
                 });
 
                 // 获取邀请记录数据
@@ -35563,15 +35561,12 @@ var UserAudit = function (_React$Component) {
     }, {
         key: 'yonghuleixingChange',
         value: function yonghuleixingChange(e) {
-            console.log(1112233333, e);
             this.setState({ type: e.target.value }, function () {
-                console.log(998877, this.state.userId, this.state.type);
                 _tourongApi2.default.updateUser({
                     id: this.state.userId,
                     type: this.state.type,
                     basicOK: 0
                 }).then(function (data) {
-                    console.log(77777, data);
                     if (data.status == 0) {
                         (0, _message.messageSuccess)('用户类型已成功修改并重置');
                     } else {
@@ -35583,13 +35578,12 @@ var UserAudit = function (_React$Component) {
     }, {
         key: 'confirm',
         value: function confirm() {
-
             if (this.state.payOk != 1) {
                 (0, _message.messageWarning)('成为会员后才能够进行提现');
                 return false;
             }
 
-            if (this.state.identityCardReview != 1) {
+            if (this.state.identityCardReview != 2) {
                 (0, _message.messageWarning)('通过身份认证后才能够进行提现');
                 return false;
             }
@@ -35612,7 +35606,6 @@ var UserAudit = function (_React$Component) {
                             location.reload();
                         }, 2000);
                     }
-                    console.log(data);
                 });
             }
         }
@@ -35642,7 +35635,6 @@ var UserAudit = function (_React$Component) {
 
                     /*判断是审核还是修改权限 如果是修改则无需发送短信给用户*/
                     if (_this3.state.review == 1) {
-                        console.log('无需发送短信');
                         return false;
                     }
 
@@ -35662,11 +35654,6 @@ var UserAudit = function (_React$Component) {
                     // yzm = calcMD5(yzmStr); // 随机验证码
 
                     var jsonData = '{"password":"YLHdmFoX7C","num":"' + _this3.state.phone + '","templateNum":"3"}';
-
-                    console.log(123, Authorization);
-                    console.log(456, sig);
-                    console.log(789, jsonData);
-
                     _jquery2.default.ajax({
                         headers: {
                             "Accept": 'application/json',
@@ -35677,16 +35664,13 @@ var UserAudit = function (_React$Component) {
                         type: 'POST',
                         dataType: 'json',
                         data: jsonData,
-                        success: function success(data) {
-                            console.log(data);
-                        }
+                        success: function success(data) {}
                     });
 
                     _this3.props.history.push('/admin/user');
                 } else {
                     (0, _message.messageError)(data.msg);
                 }
-                console.log(123, data);
             });
         }
 
@@ -35707,7 +35691,6 @@ var UserAudit = function (_React$Component) {
                 } else {
                     (0, _message.messageError)(data.msg);
                 }
-                console.log(123, data);
             });
         }
     }, {
@@ -35718,13 +35701,13 @@ var UserAudit = function (_React$Component) {
             var type = this.state.type == 1 ? '资金方' : '资产方';
 
             // 所在地区
-            var regionStr = '';
-            if (this.state.region != "") {
-                var region = eval(this.state.region);
-                var regionArr = region.map(function (item, index) {
-                    regionStr += ' ' + item;
-                });
-            }
+            // let regionStr = '';
+            // if (this.state.region != ""){
+            //     let region =  eval(this.state.region);
+            //     let regionArr = region.map((item,index)=>{
+            //         regionStr += ' '+item;
+            //     });
+            // }
 
             // 机构类别
             // Api.getConfigById(this.state.orgType).then((data)=>{
@@ -35733,8 +35716,7 @@ var UserAudit = function (_React$Component) {
             //
             //  邀请列表
             var list = this.state.yqList.map(function (item, index) {
-                console.log(11112222, item);
-                return _react2.default.createElement('p', { key: index, style: { marginBottom: '6px' } }, '\u88AB\u9080\u8BF7\u4EBA\uFF1A', item.userInfo.name, ' \xA0\xA0\xA0\xA0 \u88AB\u9080\u8BF7\u4EBAID\uFF1A', item.userId, ' \xA0\xA0\xA0\xA0\u88AB\u9080\u8BF7\u4EBA\u662F\u5426\u5DF2\u4ED8\u8D39\u6210\u4E3A\u4F1A\u5458\uFF1A', item.userInfo.payOk == 0 ? '未付费' : '已付费', '\xA0\xA0\xA0\xA0\u9080\u8BF7\u597D\u53CB\u65F6\u95F4\uFF1A', item.userInfo.landingTime || '');
+                return _react2.default.createElement('p', { key: index, style: { marginBottom: '6px' } }, '\u88AB\u9080\u8BF7\u4EBA\uFF1A', item.userInfo.name, ' \xA0\xA0\xA0\xA0 \u88AB\u9080\u8BF7\u4EBAID\uFF1A', item.userId, ' \xA0\xA0\xA0\xA0\u88AB\u9080\u8BF7\u4EBA\u662F\u5426\u5DF2\u4ED8\u8D39\u6210\u4E3A\u4F1A\u5458\uFF1A', item.userInfo.payOk == 0 ? '未付费' : '已付费', '\xA0\xA0\xA0\xA0\u9080\u8BF7\u597D\u53CB\u65F6\u95F4\uFF1A', item.userInfo.created_at || '');
             });
 
             // 身份认证状态
@@ -35751,13 +35733,12 @@ var UserAudit = function (_React$Component) {
             var identityCardArr = eval(this.state.identityCard);
             var identityCardArrOne = '';
             var identityCardArrTwo = '';
-            console.log(112233, identityCardArr);
             if (this.state.identityCardReview == 2) {
                 identityCardArrOne = GLOBAL_IMG_URL + identityCardArr[0];
                 identityCardArrTwo = GLOBAL_IMG_URL + identityCardArr[1];
             }
 
-            return _react2.default.createElement('div', { className: 'UserAudit' }, _react2.default.createElement('p', { style: { fontWeight: '900', fontSize: '16px' } }, '\u57FA\u672C\u4FE1\u606F'), _react2.default.createElement('p', { className: 'row', style: { marginTop: '10px' } }, _react2.default.createElement('span', null, '\u7528\u6237\u7C7B\u578B\uFF1A', type), _react2.default.createElement('span', null, '\u624B\u673A\u53F7\u7801\uFF1A', this.state.phone), _react2.default.createElement('span', null, '\u59D3\u540D\uFF1A', this.state.name), _react2.default.createElement('span', null, '\u5730\u533A\uFF1A', regionStr)), _react2.default.createElement('p', { className: 'row' }, _react2.default.createElement('span', null, '\u673A\u6784\u7C7B\u522B\uFF1A', this.state.orgTypeStr), _react2.default.createElement('span', null, '\u673A\u6784\u9009\u62E9\uFF1A', this.state.orgStr), _react2.default.createElement('span', null, '\u673A\u6784\u540D\u79F0\uFF1A', this.state.orgName), _react2.default.createElement('span', null, '\u90E8\u95E8\u540D\u79F0\uFF1A', this.state.department)), _react2.default.createElement('p', { className: 'row' }, _react2.default.createElement('span', null, '\u804C\u4F4D\u540D\u79F0\uFF1A', this.state.position), _react2.default.createElement('span', null, '\u5FAE\u4FE1\u53F7\u7801\uFF1A', this.state.wechat), _react2.default.createElement('span', null, '\u8054\u7CFB\u90AE\u7BB1\uFF1A', this.state.email), _react2.default.createElement('span', null)), _react2.default.createElement('div', { style: { margin: '20px 0px' } }, _react2.default.createElement('div', { style: { width: '360px', height: '200px' } }, _react2.default.createElement('span', null, '\u540D\u7247\uFF1A'), _react2.default.createElement('img', { src: GLOBAL_IMG_URL + this.state.card, alt: '', style: { width: '100%', height: '100%' } }))), _react2.default.createElement('div', { className: 'quanxianBox' }, _react2.default.createElement('p', { style: { fontWeight: '900', fontSize: '16px' } }, '\u6743\u9650\u8BBE\u7F6E'), _react2.default.createElement('div', { className: 'inputBopx' }, _react2.default.createElement('p', { className: 'tit' }, '\u9009\u62E9\u5BF9\u63A5\u6A21\u5F0F\uFF1A'), _react2.default.createElement('div', { className: 'content' }, _react2.default.createElement(RadioGroup, { onChange: this.duijieChange.bind(this), value: this.state.dockingType }, _react2.default.createElement(RadioButton, { value: '1' }, '\u666E\u901A\u6A21\u5F0F'), _react2.default.createElement(RadioButton, { value: '2' }, '\u9080\u8BF7\u6A21\u5F0F'), _react2.default.createElement(RadioButton, { value: '3' }, '\u4ED8\u8D39\u6A21\u5F0F'), _react2.default.createElement(RadioButton, { value: '4' }, '\u4E8C\u9009\u4E00\u6A21\u5F0F')))), _react2.default.createElement('div', { className: 'inputBopx' }, _react2.default.createElement('p', { className: 'tit' }, '\u88AB\u5BF9\u63A5\u6A21\u5F0F\uFF1A'), _react2.default.createElement('div', { className: 'content' }, _react2.default.createElement(RadioGroup, { onChange: this.beiduijieChange.bind(this), value: this.state.beDockingType }, _react2.default.createElement(RadioButton, { value: '1' }, '\u666E\u901A\u6A21\u5F0F'), _react2.default.createElement(RadioButton, { value: '2' }, '\u9650\u5236\u6A21\u5F0F')))), _react2.default.createElement('div', { className: 'inputBopx' }, _react2.default.createElement('p', { className: 'tit', style: { width: '330px' } }, '\u4FEE\u6539\u7528\u6237\u7C7B\u578B(\u8BF7\u52FF\u4E71\u70B9\uFF0C\u5207\u6362\u5373\u4F1A\u91CD\u7F6E\u7528\u6237\uFF0C\u8BF7\u8C28\u614E\u64CD\u4F5C)\uFF1A'), _react2.default.createElement('div', { className: 'content' }, _react2.default.createElement(RadioGroup, { onChange: this.yonghuleixingChange.bind(this), value: this.state.type }, _react2.default.createElement(RadioButton, { value: '1' }, '\u8D44\u91D1\u65B9'), _react2.default.createElement(RadioButton, { value: '2' }, '\u8D44\u4EA7\u65B9'))))), _react2.default.createElement('div', { style: { marginTop: '10px', fontSize: '14px', fontWeight: 900 } }, _react2.default.createElement('span', null, '\u8BE5\u7528\u6237\u5F53\u524D\u4F59\u989D\uFF1A', this.state.wallet, ' \u5143'), _react2.default.createElement(_inputNumber2.default, {
+            return _react2.default.createElement('div', { className: 'UserAudit' }, _react2.default.createElement('p', { style: { fontWeight: '900', fontSize: '16px' } }, '\u57FA\u672C\u4FE1\u606F'), _react2.default.createElement('p', { className: 'row', style: { marginTop: '10px' } }, _react2.default.createElement('span', null, '\u7528\u6237\u7C7B\u578B\uFF1A', type), _react2.default.createElement('span', null, '\u624B\u673A\u53F7\u7801\uFF1A', this.state.phone), _react2.default.createElement('span', null, '\u59D3\u540D\uFF1A', this.state.name), _react2.default.createElement('span', null, '\u5730\u533A\uFF1A', this.state.region)), _react2.default.createElement('p', { className: 'row' }, _react2.default.createElement('span', null, '\u673A\u6784\u7C7B\u522B\uFF1A', this.state.orgTypeStr), _react2.default.createElement('span', null, '\u673A\u6784\u9009\u62E9\uFF1A', this.state.orgStr), _react2.default.createElement('span', null, '\u673A\u6784\u540D\u79F0\uFF1A', this.state.orgName), _react2.default.createElement('span', null, '\u90E8\u95E8\u540D\u79F0\uFF1A', this.state.department)), _react2.default.createElement('p', { className: 'row' }, _react2.default.createElement('span', null, '\u804C\u4F4D\u540D\u79F0\uFF1A', this.state.position), _react2.default.createElement('span', null, '\u5FAE\u4FE1\u53F7\u7801\uFF1A', this.state.wechat), _react2.default.createElement('span', null, '\u8054\u7CFB\u90AE\u7BB1\uFF1A', this.state.email), _react2.default.createElement('span', null)), _react2.default.createElement('div', { style: { margin: '20px 0px' } }, _react2.default.createElement('div', { style: { width: '360px', height: '200px' } }, _react2.default.createElement('span', null, '\u540D\u7247\uFF1A'), _react2.default.createElement('img', { src: GLOBAL_IMG_URL + this.state.card, alt: '', style: { width: '100%', height: '100%' } }))), _react2.default.createElement('div', { className: 'quanxianBox' }, _react2.default.createElement('p', { style: { fontWeight: '900', fontSize: '16px' } }, '\u6743\u9650\u8BBE\u7F6E'), _react2.default.createElement('div', { className: 'inputBopx' }, _react2.default.createElement('p', { className: 'tit' }, '\u9009\u62E9\u5BF9\u63A5\u6A21\u5F0F\uFF1A'), _react2.default.createElement('div', { className: 'content' }, _react2.default.createElement(RadioGroup, { onChange: this.duijieChange.bind(this), value: this.state.dockingType }, _react2.default.createElement(RadioButton, { value: '1' }, '\u666E\u901A\u6A21\u5F0F'), _react2.default.createElement(RadioButton, { value: '2' }, '\u9080\u8BF7\u6A21\u5F0F'), _react2.default.createElement(RadioButton, { value: '3' }, '\u4ED8\u8D39\u6A21\u5F0F'), _react2.default.createElement(RadioButton, { value: '4' }, '\u4E8C\u9009\u4E00\u6A21\u5F0F')))), _react2.default.createElement('div', { className: 'inputBopx' }, _react2.default.createElement('p', { className: 'tit' }, '\u88AB\u5BF9\u63A5\u6A21\u5F0F\uFF1A'), _react2.default.createElement('div', { className: 'content' }, _react2.default.createElement(RadioGroup, { onChange: this.beiduijieChange.bind(this), value: this.state.beDockingType }, _react2.default.createElement(RadioButton, { value: '1' }, '\u666E\u901A\u6A21\u5F0F'), _react2.default.createElement(RadioButton, { value: '2' }, '\u9650\u5236\u6A21\u5F0F')))), _react2.default.createElement('div', { className: 'inputBopx' }, _react2.default.createElement('p', { className: 'tit', style: { width: '330px' } }, '\u4FEE\u6539\u7528\u6237\u7C7B\u578B(\u8BF7\u52FF\u4E71\u70B9\uFF0C\u5207\u6362\u5373\u4F1A\u91CD\u7F6E\u7528\u6237\uFF0C\u8BF7\u8C28\u614E\u64CD\u4F5C)\uFF1A'), _react2.default.createElement('div', { className: 'content' }, _react2.default.createElement(RadioGroup, { onChange: this.yonghuleixingChange.bind(this), value: this.state.type }, _react2.default.createElement(RadioButton, { value: '1' }, '\u8D44\u91D1\u65B9'), _react2.default.createElement(RadioButton, { value: '2' }, '\u8D44\u4EA7\u65B9'))))), _react2.default.createElement('div', { style: { marginTop: '10px', fontSize: '14px', fontWeight: 900 } }, _react2.default.createElement('span', null, '\u8BE5\u7528\u6237\u5F53\u524D\u4F59\u989D\uFF1A', this.state.wallet, ' \u5143'), _react2.default.createElement(_inputNumber2.default, {
                 defaultValue: 100,
                 formatter: function formatter(value) {
                     return ('$ ' + value).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -36094,7 +36075,7 @@ var User = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { className: 'user' }, _react2.default.createElement(_tabs2.default, { defaultActiveKey: '1', onChange: this.callback.bind(this) }, _react2.default.createElement(TabPane, { tab: '\u672A\u5BA1\u6838\u7528\u6237', key: '1' }, _react2.default.createElement(_shenheUserList2.default, null)), _react2.default.createElement(TabPane, { tab: '\u5168\u90E8\u7528\u6237', key: '2' }, _react2.default.createElement(_allUserList2.default, null)), _react2.default.createElement(TabPane, { tab: '\u8EAB\u4EFD\u8BA4\u8BC1', key: '3' }, _react2.default.createElement(_userShenfenrenzheng2.default, null))));
+            return _react2.default.createElement('div', { className: 'user' }, _react2.default.createElement(_tabs2.default, { defaultActiveKey: '2', onChange: this.callback.bind(this) }, _react2.default.createElement(TabPane, { tab: '\u672A\u5BA1\u6838\u7528\u6237', key: '1' }, _react2.default.createElement(_shenheUserList2.default, null)), _react2.default.createElement(TabPane, { tab: '\u5168\u90E8\u7528\u6237', key: '2' }, _react2.default.createElement(_allUserList2.default, null)), _react2.default.createElement(TabPane, { tab: '\u8EAB\u4EFD\u8BA4\u8BC1', key: '3' }, _react2.default.createElement(_userShenfenrenzheng2.default, null))));
         }
     }]);
 

@@ -264,7 +264,7 @@ export default class UserAudit extends React.Component{
         let list = this.state.yqList.map((item,index)=>{
             return (
                 <p key={index} style={{marginBottom:'6px'}}>
-                    被邀请人：{item.userInfo.name} &nbsp;&nbsp;&nbsp;&nbsp; 被邀请人ID：{item.userId} &nbsp;&nbsp;&nbsp;&nbsp;被邀请人是否已付费成为会员：{item.userInfo.payOk == 0 ? '未付费' : '已付费'}&nbsp;&nbsp;&nbsp;&nbsp;邀请好友时间：{item.userInfo.landingTime||''}
+                    被邀请人：{item.userInfo.name} &nbsp;&nbsp;&nbsp;&nbsp; 被邀请人ID：{item.userId} &nbsp;&nbsp;&nbsp;&nbsp;被邀请人是否已付费成为会员：{item.userInfo.payOk == 0 ? '未付费' : '已付费'}&nbsp;&nbsp;&nbsp;&nbsp;邀请好友时间：{item.userInfo.created_at||''}
                     </p>
             )
         });
