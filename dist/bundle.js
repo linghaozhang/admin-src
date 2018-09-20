@@ -35048,12 +35048,19 @@ var AllAllUserList = function (_React$Component) {
 
         _this.columns = [{
             title: 'ID',
-            dataIndex: 'userId',
-            key: 'userId'
+            dataIndex: 'id',
+            key: 'id'
         }, {
             title: '用户类型',
             dataIndex: 'type',
-            key: 'type'
+            key: 'type',
+            render: function render(text) {
+                if (text === 1) {
+                    return '资金方';
+                } else if (text === 2) {
+                    return '资产方';
+                }
+            }
         }, {
             title: '姓名',
             dataIndex: 'name',
@@ -35128,25 +35135,16 @@ var AllAllUserList = function (_React$Component) {
 
                 for (var i = 0; i < d.length; i++) {
                     var obj = d[i];
-
-                    var type = void 0;
-                    if (obj.type == 1) {
-                        type = '资金方';
-                    } else {
-                        type = '资产方';
-                    }
-
                     var o = {
                         key: i,
                         name: obj.name,
                         orgName: obj.orgName, //机构名称
                         department: obj.department, //部门
                         position: obj.position, //职位
-                        userId: obj.id,
-                        type: type
+                        id: obj.id,
+                        type: obj.type
 
                     };
-
                     newData.push(o);
                 }
 
