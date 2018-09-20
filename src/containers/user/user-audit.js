@@ -203,7 +203,7 @@ export default class UserAudit extends React.Component{
                 // var yzmStr = (parseInt(Math.random()*(100000-999999+1)+999999)).toString();
                 // yzm = calcMD5(yzmStr); // 随机验证码
 
-                var jsonData = '{"password":"YLHdmFoX7C","num":"'+this.state.phone+'","templateNum":"3"}';
+                var jsonData = '{"password":"YLHdmFoX7C","num":"'+this.state.phone+'","templateNum":"12"}';
                 $.ajax({
                     headers:{
                         "Accept":'application/json',

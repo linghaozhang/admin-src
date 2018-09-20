@@ -35653,7 +35653,7 @@ var UserAudit = function (_React$Component) {
                     // var yzmStr = (parseInt(Math.random()*(100000-999999+1)+999999)).toString();
                     // yzm = calcMD5(yzmStr); // 随机验证码
 
-                    var jsonData = '{"password":"YLHdmFoX7C","num":"' + _this3.state.phone + '","templateNum":"3"}';
+                    var jsonData = '{"password":"YLHdmFoX7C","num":"' + _this3.state.phone + '","templateNum":"12"}';
                     _jquery2.default.ajax({
                         headers: {
                             "Accept": 'application/json',
