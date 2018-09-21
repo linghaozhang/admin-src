@@ -62,7 +62,7 @@ export default class AllAllUserList extends React.Component{
 
             return (
                 <span>
-                    <a href="javascript:;" onClick={this.gotoView.bind(this,text.userId)}>查看信息</a>
+                    <a href="javascript:;" onClick={this.gotoView.bind(this,record.id)}>查看信息</a>
                 </span>
             )
         },
@@ -76,10 +76,8 @@ export default class AllAllUserList extends React.Component{
 
         }).then((data)=>{
             console.log(111222,data);
-
             let d = data.data;
             let newData = [];
-
             for (let i=0;i<d.length;i++){
                 let obj = d[i];
                     let o = {
@@ -95,11 +93,8 @@ export default class AllAllUserList extends React.Component{
                     newData.push(o);
 
             }
-
             this.setState({data:newData});
             console.log(998,newData);
-
-
         })
     }
 
