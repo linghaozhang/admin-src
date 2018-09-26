@@ -62,7 +62,7 @@ export default class AllAllUserList extends React.Component{
 
             return (
                 <span>
-                    <a href="javascript:;" onClick={this.gotoView.bind(this,text.userId)}>查看信息</a>
+                    <a href="javascript:;" onClick={this.gotoView.bind(this,text.id)}>查看信息</a>
                 </span>
             )
         },

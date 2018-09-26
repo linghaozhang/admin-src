@@ -2,7 +2,7 @@
 // fetch请求header
 var fetchHeader = {
     "Content-Type":"application/json",
-    "Authorization":"Bearer "+G_token,
+    "Authorization":"Bearer "+sessionStorage.getItem('TRQtoken'),
 };
 
 

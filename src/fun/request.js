@@ -3,7 +3,7 @@
 // fetch请求header
 const fetchHeader = {
     // "Content-Type":"application/json",
-    'Authorization':'Bearer '+G_token,
+    'Authorization':'Bearer '+sessionStorage.getItem('TRQtoken'),
 };
 
 // fetch请求封装
