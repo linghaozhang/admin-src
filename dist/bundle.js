@@ -1737,7 +1737,7 @@ Object.defineProperty(exports, "__esModule", {
 // fetch请求header
 var fetchHeader = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer " + G_token
+    "Authorization": "Bearer " + sessionStorage.getItem('TRQtoken')
 };
 
 /*
@@ -35082,7 +35082,7 @@ var AllAllUserList = function (_React$Component) {
             key: 'action',
             render: function render(text, record) {
 
-                return _react2.default.createElement('span', null, _react2.default.createElement('a', { href: 'javascript:;', onClick: _this.gotoView.bind(_this, text.userId) }, '\u67E5\u770B\u4FE1\u606F'));
+                return _react2.default.createElement('span', null, _react2.default.createElement('a', { href: 'javascript:;', onClick: _this.gotoView.bind(_this, text.id) }, '\u67E5\u770B\u4FE1\u606F'));
             }
         }];
 
@@ -36170,7 +36170,7 @@ Object.defineProperty(exports, "__esModule", {
 // fetch请求header
 var fetchHeader = {
     // "Content-Type":"application/json",
-    'Authorization': 'Bearer ' + G_token
+    'Authorization': 'Bearer ' + sessionStorage.getItem('TRQtoken')
 };
 
 // fetch请求封装
