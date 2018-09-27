@@ -1,6 +1,7 @@
 var path = require('path');
 var homeUrl = path.resolve(__dirname, '../'); // 项目根目录
-
+var webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry:  __dirname + "/../src/main.js",//已多次提及的唯一入口文件
@@ -69,6 +70,26 @@ module.exports = {
 
         ],
     },
+    plugins:[
+        new BundleAnalyzerPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            warnings:false,
+            beautify: false,
+            output: {
+                comments: false,
+            },
+            compress:{
+                join_vars:true,
+                warnings:false,
+                reduce_vars: true,
+            },
+            toplevel:false,
+            ie8:false
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+    ],
     resolve: {
         //自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
         // extensions: ['', '.js', '.jsx'],
