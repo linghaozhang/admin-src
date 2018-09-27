@@ -46,7 +46,7 @@ module.exports = {
                 query: {
                     presets: ['react', 'es2015','stage-1'],
                     plugins: [
-                        ["import", {"libraryName": "antd", "style": "css"}]
+                        ["import", {"libraryName": "antd", "style": true}]
                     ]
                 },
             },
@@ -57,7 +57,7 @@ module.exports = {
                 query: {
                     presets: ['react', 'es2015','stage-1'],
                     plugins: [
-                        ["import", {"libraryName": "antd", "style": "css"}]
+                        ["import", {"libraryName": "antd", "style": true}]
                     ]
                 },
             },
@@ -80,7 +80,9 @@ module.exports = {
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader?modules', 'less-loader', 'postcss-loader'],
+                    // use: ['css-loader?modules', 'less-loader', 'postcss-loader'],
+                    use: [{loader:'css-loader'}, {loader:'less-loader'}],
+
                 }),
             },
         ],

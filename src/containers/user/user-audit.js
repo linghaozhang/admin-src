@@ -10,7 +10,6 @@ import Api from '@api/tourongApi';
 import {messageSuccess,messageError,messageWarning} from '@fun/message'; // 全局提示
 import {getData} from '@fun/xdfun';
 var md5 = require('md5');
-import $ from 'jquery';
 
 export default class UserAudit extends React.Component{
 
@@ -204,18 +203,10 @@ export default class UserAudit extends React.Component{
                 // yzm = calcMD5(yzmStr); // 随机验证码
 
                 var jsonData = '{"password":"YLHdmFoX7C","num":"'+this.state.phone+'","templateNum":"12"}';
-                $.ajax({
-                    headers:{
-                        "Accept":'application/json',
-                        "Authorization":Authorization,
-                        "Content-Type":'application/json;charset=utf-8'
-                    },
-                    url: 'http://apis.7moor.com/v20160818/sms/sendInterfaceTemplateSms/N00000014371?sig='+sig,
-                    type: 'POST',
-                    dataType:'json',
-                    data: jsonData,
-                    success:function(data){
-                    }
+                Api.sendMessage(jsonData,'http://apis.7moor.com/v20160818/sms/sendInterfaceTemplateSms/N00000014371?sig='+sig,{"Accept":'application/json',
+                    "Authorization":Authorization,
+                    "Content-Type":'application/json;charset=utf-8'}).then(res=>{
+                    console.log('res',res);
                 })
 
 

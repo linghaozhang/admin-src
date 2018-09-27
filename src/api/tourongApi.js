@@ -288,6 +288,13 @@ const Api = {
             headers: fetchHeader,
             body:JSON.stringify(name)
         });
+    },
+    sendMessage:(data,url,headers)=>{
+        return fetchService( url,{
+            method: "POST",
+            headers: {...headers},
+            body:data
+        });
     }
 };
 
