@@ -2,6 +2,7 @@ var path = require('path');
 var homeUrl = path.resolve(__dirname, '../'); // 项目根目录
 var webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry:  __dirname + "/../src/main.js",//已多次提及的唯一入口文件
@@ -26,7 +27,18 @@ module.exports = {
         }
     },
     module: {
-        loaders: [
+        rules: [
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader?limit=10000&mimetype=application/font-woff"
+            }, {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader"
+            },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader?limit=8192&publicPath=./'
+            },
             {
                 test: /\.js?$/,
                 exclude: /(node_modules)/,
@@ -50,27 +62,31 @@ module.exports = {
                 },
             },
             {
-                test: /\.css?$/,
-                loaders: 'style-loader!css-loader'
-            },
-            {
-                test: /\.(png|jpg)$/,
-                loader: 'url-loader?limit=8192'
-            },
-            {
-                test: /\.less/,
-                loaders: ['style-loader','css-loader','less-loader','postcss-loader'],
-            },{
-                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "url-loader?limit=10000&mimetype=application/font-woff"
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader?modules', 'postcss-loader'],
+                }),
             }, {
-                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file-loader"
-            }
-
+                test: /\.css$/,
+                include: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'postcss-loader'],
+                }),
+            },
+            {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader?modules', 'less-loader', 'postcss-loader'],
+                }),
+            },
         ],
     },
     plugins:[
+        new ExtractTextPlugin({ filename: '[name].[contenthash].css', allChunks: false }),
         new BundleAnalyzerPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             warnings:false,
