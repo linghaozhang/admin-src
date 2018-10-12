@@ -67,7 +67,7 @@ export default class AllAllUserList extends React.Component {
             }else if(text===1){
                 return '已通过'
             }else{
-                return '已拒绝'
+                return '未通过'
             }
         }
     },

@@ -34,8 +34,8 @@ export default class TuijianFabu extends React.Component{
     //表格头部
     columns = [{
         title: '发布人',
-        dataIndex: 'name',
-        key: 'name',
+        dataIndex: 'userId',
+        key: 'userId',
         width:'120px',
     }, {
         title: '主要内容',
@@ -71,9 +71,7 @@ export default class TuijianFabu extends React.Component{
         }).then((data)=>{
             this.updateDate();
         })
-
     }
-
     // 刷新推荐数据
     updateDate(){
         // 获取所有用户，筛选出还未审核的用户
@@ -89,24 +87,17 @@ export default class TuijianFabu extends React.Component{
             let allDate = [];
 
             d.map((item,index)=>{
-
-                console.log(6666,item);
-                
                 let obj = item;
-
                 let o = {
                     key:index,
-                    name:obj.userInfo.name,
                     orgName:obj.orgName, //机构名称
                     department:obj.department, //部门
                     position:obj.position, //职位
                     userId:obj.id,
                     content:obj.txt,
                 };
-
                 allDate.push(o);
             });
-
             this.setState({data:allDate});
         });
     }
