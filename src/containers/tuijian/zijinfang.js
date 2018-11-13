@@ -41,15 +41,18 @@ export default class TuijianZijinfang extends React.Component{
         title: '机构名称',
         dataIndex: 'orgName',
         key: 'orgName',
-    }, {
-        title: '部门',
-        dataIndex: 'department',
-        key: 'department',
-    },{
+    },
+        {
         title: '职位',
         dataIndex: 'position',
         key: 'position',
-    }, {
+    },
+    //     {
+    //     title: '部门',
+    //     dataIndex: 'department',
+    //     key: 'department',
+    // },
+        {
         title: 'Action',
         key: 'action',
         render: (text, record) => {
