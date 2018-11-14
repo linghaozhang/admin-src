@@ -71,11 +71,13 @@ export default class UserShenFenRenZheng extends React.Component{
         title: '机构名称',
         dataIndex: 'orgName',
         key: 'orgName',
-    }, {
-        title: '部门',
-        dataIndex: 'department',
-        key: 'department',
-    },{
+    },
+    //     {
+    //     title: '部门',
+    //     dataIndex: 'department',
+    //     key: 'department',
+    // },
+        {
         title: '职位',
         dataIndex: 'position',
         key: 'position',

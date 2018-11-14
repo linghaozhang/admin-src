@@ -287,19 +287,20 @@ export default class UserAudit extends React.Component{
                     <span>用户类型：{type}</span>
                     <span>手机号码：{this.state.phone}</span>
                     <span>姓名：{this.state.name}</span>
-                    <span>地区：{this.state.region}</span>
+                    <span>机构名称：{this.state.orgName}</span>
+                    {/*<span>地区：{this.state.region}</span>*/}
                     {/*<span>出生年月：{this.state.birthday}</span>*/}
                 </p>
-                <p className="row">
-                    <span>机构类别：{this.state.orgTypeStr}</span>
-                    <span>机构选择：{this.state.orgStr}</span>
-                    <span>机构名称：{this.state.orgName}</span>
-                    <span>部门名称：{this.state.department}</span>
-                </p>
+                {/*<p className="row">*/}
+                    {/*<span>机构类别：{this.state.orgTypeStr}</span>*/}
+                    {/*<span>机构选择：{this.state.orgStr}</span>*/}
+                    {/*<span>机构名称：{this.state.orgName}</span>*/}
+                    {/*<span>部门名称：{this.state.department}</span>*/}
+                {/*</p>*/}
                 <p className="row">
                     <span>职位名称：{this.state.position}</span>
-                    <span>微信号码：{this.state.wechat}</span>
-                    <span>联系邮箱：{this.state.email}</span>
+                    {/*<span>微信号码：{this.state.wechat}</span>*/}
+                    {/*<span>联系邮箱：{this.state.email}</span>*/}
                     <span></span>
                 </p>
                 <div style={{margin:'20px 0px'}}>
