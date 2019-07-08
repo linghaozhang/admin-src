@@ -22,6 +22,7 @@ export default class UserShenFenRenZheng extends React.Component{
 
             images:[],
             userId:0,
+            loading:false
 
         };
     }
@@ -96,7 +97,7 @@ export default class UserShenFenRenZheng extends React.Component{
 
 
     componentWillMount() {
-
+    this.setState({loading:true});
         // 获取所有用户，筛选出还未审核的用户
         Api.getAllUser({
 
@@ -125,7 +126,7 @@ export default class UserShenFenRenZheng extends React.Component{
                 }
             }
 
-            this.setState({data:newData});
+            this.setState({data:newData,loading:false});
             console.log(998,newData);
 
 
@@ -140,7 +141,7 @@ export default class UserShenFenRenZheng extends React.Component{
     render(){
         return (
             <div>
-                <Table columns={this.columns} dataSource={this.state.data} />
+                <Table columns={this.columns} dataSource={this.state.data} loading={this.state.loading}/>
 
                 <Modal
                     title="身份审核"

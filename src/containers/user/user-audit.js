@@ -44,6 +44,7 @@ export default class UserAudit extends React.Component{
             orgTypeStr:'', //机构类别的中文
             identityCardReview: '', // 身份认证状态
             identityCard: '', // 身份证照片 数组
+            userRole:''
         };
       }
 
@@ -84,6 +85,7 @@ export default class UserAudit extends React.Component{
                     identityCard: d.identityCard,
                     dockingType: d.dockingType.toString(),
                     beDockingType: d.beDockingType.toString(),
+                    userRole:d.identity+''
                 });
 
             })
@@ -104,6 +106,11 @@ export default class UserAudit extends React.Component{
     beiduijieChange(e){
         this.setState({beDockingType:e.target.value})
     }
+    onUserRoleChange=(e)=>{
+        this.setState({
+            userRole:e.target.value
+        })
+    };
 
     //改变对接选项
     duijieChange(e){
@@ -177,6 +184,7 @@ export default class UserAudit extends React.Component{
             dockingType:this.state.dockingType,
             beDockingType:this.state.beDockingType,
             orgType:this.state.orgType,
+            identity:this.state.userRole
         }).then((data)=>{
             if (data.status==0){
                 
@@ -324,13 +332,22 @@ export default class UserAudit extends React.Component{
                         </div>
 
                     </div>
-
                     <div className="inputBopx">
                         <p className="tit">被对接模式：</p>
                         <div className="content">
                             <RadioGroup onChange={this.beiduijieChange.bind(this)} value={this.state.beDockingType}>
                                 <RadioButton value="1">普通模式</RadioButton>
                                 <RadioButton value="2">限制模式</RadioButton>
+                            </RadioGroup>
+                        </div>
+                    </div>
+                    <div className="inputBopx">
+                        <p className="tit">选择用户角色：</p>
+                        <div className="content">
+                            <RadioGroup onChange={this.onUserRoleChange} value={this.state.userRole}>
+                                <RadioButton value="1">联合创始人</RadioButton>
+                                <RadioButton value="2">合伙人</RadioButton>
+                                <RadioButton value="3">普通用户</RadioButton>
                             </RadioGroup>
                         </div>
                     </div>

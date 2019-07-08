@@ -14,7 +14,8 @@ export default class AllAllUserList extends React.Component {
         // 初始状态
         this.state = {
             data: [{}],
-            disabled: true
+            disabled: true,
+            loading:false
         };
     }
 
@@ -100,7 +101,7 @@ export default class AllAllUserList extends React.Component {
 
 
     componentWillMount() {
-
+        this.setState({loading:true})
         // 获取所有用户，筛选出还未审核的用户
         Api.getAllUser({}).then((data) => {
             console.log(111222, data);
@@ -123,7 +124,7 @@ export default class AllAllUserList extends React.Component {
                 newData.push(o);
 
             }
-            this.setState({data: newData});
+            this.setState({data: newData,loading:false});
             console.log(998, newData);
         })
     }
@@ -134,21 +135,25 @@ export default class AllAllUserList extends React.Component {
     }
 
     onSearch = (val) => {
+        this.setState({loading:true})
         Api.getInfoFormName({name: val}).then(res => {
             if (res.status === 0) {
                 this.setState({
                     disabled: false,
-                    data: res.data
+                    data: res.data,
+                    loading:false
                 })
             }
         })
     };
     getAllUsers = () => {
+        this.setState({loading:true})
         Api.getInfoFormName({}).then(res => {
             if (res.status === 0) {
                 this.setState({
                     disabled: true,
-                    data: res.data
+                    data: res.data,
+                    loading:false
                 })
             }
         })
@@ -169,7 +174,7 @@ export default class AllAllUserList extends React.Component {
 
                 </div>
 
-                <Table columns={this.columns} dataSource={this.state.data}/>
+                <Table columns={this.columns} dataSource={this.state.data} loading={this.state.loading}/>
             </div>
         )
     }
